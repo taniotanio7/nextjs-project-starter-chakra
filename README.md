@@ -59,23 +59,85 @@ import useTest from "@hooks/useTest";
 
 ### Styles
 
-This project uses `twin.macro` for styling using `Tailwind CSS` and `emotion` for custom CSS-in-JS styling
+This project uses `Chakra UI` and `emotion` for styling.
 
-To use Tailwind classes in component simply import `twin.macro`:
+It can be used a'la styled-components:
 
-```tsx
-import "twin.macro";
+```js
+<chakra.button
+  px="3"
+  py="2"
+  bg="green.200"
+  rounded="md"
+  _hover={{ bg: "green.300" }}
+>
+  Click me
+</chakra.button>
 ```
 
-and use the `tw` prop inside component
+The available component props are described here: [https://chakra-ui.com/docs/features/style-props](https://chakra-ui.com/docs/features/style-props)
 
-```tsx
-<p tw="flex text-gray-500">Some text</p>
+Chakra also provides `sx` prop to pass any arbitrary CSS with Theme tokens. Usefull when there is no component prop available.
+
+```js
+<Image
+  src="http://placekitten.com/200/300"
+  alt="a kitten"
+  sx={{ filter: "blur(8px)" }}
+/>
 ```
 
-To write custom styles using SCSS-like syntax use Emotion.
+More info here: [https://chakra-ui.com/docs/features/the-sx-prop](https://chakra-ui.com/docs/features/the-sx-prop)
 
-More info in the [**twin.macro docs**](https://github.com/ben-rogerson/twin.macro)
+## Testing
+
+### Jest
+
+For unit tests Jest is used along with `react-testing-library`. The tests are located in `/test/pages/SomePage.test.tsx`
+
+```js
+describe("HomePage", () => {
+  it("should render the heading", () => {
+    render(<Home />);
+
+    const heading = screen.getByText(/Welcome to/i);
+
+    expect(heading).toBeInTheDocument();
+  });
+});
+```
+
+### Cypress
+
+For end-to-end and integration tests Cypress is used. The tests are located in the `/cypress/integration/` directory:
+
+```ts
+context("Home Page", () => {
+  beforeEach(() => {
+    cy.visit("http://localhost:3000");
+  });
+
+  it("should render the home page and display a message", () => {
+    cy.get("h1").contains("Welcome");
+  });
+});
+```
+
+Run with `yarn cypress` (tests once) or `yarn cypress:open` (opens the Cypress GUI)
+
+> Note: before running Cypress tests you must run the Next.js server as well: `yarn dev` or `yarn start` (production build)
+
+## Commit lint
+
+### Pre-commit checks
+
+Every commit is checked for validity by `lint-staged` which uses Prettier for formatting and ESLint for static type-checking
+
+### Commit message hook
+
+When commiting from CLI `commitizen` is used to format commit message according to the conventional-changelog
+
+Every commit is also checked by if matching the rules of conventional-changelog no mather if it was created using the `commitizen`
 
 ## TODO List
 
