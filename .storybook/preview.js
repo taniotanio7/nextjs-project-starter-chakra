@@ -1,9 +1,5 @@
+import { ChakraProvider, CSSReset } from "@chakra-ui/react";
 import React from "react";
-import { GlobalStyles, theme } from "twin.macro";
-import { CacheProvider } from "@emotion/react";
-import createCache from "@emotion/cache";
-
-const cache = createCache({ prepend: true, key: "twin" });
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -18,9 +14,9 @@ export const parameters = {
 
 export const decorators = [
   Story => (
-    <CacheProvider value={cache}>
-      <GlobalStyles />
+    <ChakraProvider>
+      <CSSReset />
       <Story />
-    </CacheProvider>
+    </ChakraProvider>
   ),
 ];

@@ -13,7 +13,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
     "paths": {
       "@components/*": ["components/*"],
@@ -22,12 +21,6 @@
     },
     "types": ["cypress", "@testing-library/cypress"]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "twin.d.ts",
-    "jest.setup.js"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.setup.js"],
   "exclude": ["node_modules"]
 }
