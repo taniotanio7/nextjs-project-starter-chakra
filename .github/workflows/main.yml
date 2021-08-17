@@ -32,6 +32,7 @@ jobs:
       uses: cypress-io/github-action@v2
       with:
         browser: chrome
+        start: yarn start
         # record: true # - use this to record the tests (Cypress.io account needed)
         # more info: https://github.com/marketplace/actions/cypress-io#record-test-results-on-cypress-dashboard
         
