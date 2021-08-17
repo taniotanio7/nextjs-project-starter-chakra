@@ -22,14 +22,19 @@ jobs:
       with:
         node-version: '14'
         cache: 'yarn'
-    - run: yarn install
-    - run: yarn build
-    - run: yarn test
-    - name: Save build folder
-      uses: actions/upload-artifact@v2
+    - name: Install dependencies
+      run: yarn install
+    - name: Build Next.js app
+      run: yarn build
+    - name: Run tests
+      run: yarn test
+    - name: Run Cypress test suite
+      uses: cypress-io/github-action@v2
       with:
-        name: build
-        if-no-files-found: error
-        path: .next
+        browser: chrome
+        # record: true # - use this to record the tests (Cypress.io account needed)
+        # more info: https://github.com/marketplace/actions/cypress-io#record-test-results-on-cypress-dashboard
+        
+      
     
 
